@@ -11,6 +11,6 @@ public class CountryEntity {
     private int totalDeaths;
     private int newRecovered;
     private int totalRecovered;
-    private LocalDate date
+    private LocalDate date;
     // getters and setters
 }

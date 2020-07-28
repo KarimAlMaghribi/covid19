@@ -12,10 +12,12 @@ public class MongoDataApplication extends AbstractReactiveMongoConfiguration {
 		return MongoClients.create();
 	}
 
+
+
 	@Override
 	protected String getDatabaseName() {
 		return "reactive";
 	}
-	}
-
 }
+
+
