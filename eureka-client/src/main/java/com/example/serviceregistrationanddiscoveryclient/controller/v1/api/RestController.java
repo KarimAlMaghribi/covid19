@@ -1,13 +1,15 @@
 package com.example.serviceregistrationanddiscoveryclient.controller.v1.api;
 
+import com.example.serviceregistrationanddiscoveryclient.dto.model.CountryDTO;
+import com.example.serviceregistrationanddiscoveryclient.dto.model.FavoriteCountryDTO;
+import com.example.serviceregistrationanddiscoveryclient.dto.model.FavoriteGlobalDTO;
+import com.example.serviceregistrationanddiscoveryclient.dto.model.GlobalDTO;
 import com.example.serviceregistrationanddiscoveryclient.model.entity.FavoriteCountryEntity;
 import com.example.serviceregistrationanddiscoveryclient.model.entity.FavoriteGlobalEntity;
-import com.example.serviceregistrationanddiscoveryclient.remoteDataSource.Country;
-import com.example.serviceregistrationanddiscoveryclient.remoteDataSource.Global;
-import com.example.serviceregistrationanddiscoveryclient.repository.CountryRepository;
-import com.example.serviceregistrationanddiscoveryclient.repository.FavoritesCountryRepository;
 import com.example.serviceregistrationanddiscoveryclient.repository.FavoritesGlobalRepository;
 import com.example.serviceregistrationanddiscoveryclient.repository.GlobalRepository;
+import com.example.serviceregistrationanddiscoveryclient.service.DataService;
+import com.example.serviceregistrationanddiscoveryclient.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,41 +21,40 @@ import java.util.List;
 public class RestController {
 
     @Autowired
-    CountryRepository countryRepository;
+    DataService dataService;
     @Autowired
     GlobalRepository globalRepository;
-    @Autowired
-    FavoritesCountryRepository favoritesCountryRepository;
-    @Autowired
-    FavoritesGlobalRepository favoritesGlobalRepository;
+
+    FavoriteService favoriteService;
+
 
     @GetMapping("/countries")
-    public List<Country> getCountriesData() {
-        return (List<Country>) countryRepository.findAll();
+    public List<CountryDTO> getCountriesData() {
+        return (List<CountryDTO>) dataService.getAllCountries();
     }
 
     @GetMapping("/global")
-    public Global getGlobalData() {
-        return (Global) globalRepository.findAll().get(0);
+    public GlobalDTO getGlobalData() {
+        return (GlobalDTO) dataService.getGlobalData();
     }
 
     @GetMapping("/favoriteCountries")
-    public List<FavoriteCountryEntity> getFavoriteCountriesData() {
-        return (List<FavoriteCountryEntity>) favoritesCountryRepository.findAll();
+    public List<FavoriteCountryDTO> getFavoriteCountriesData() {
+        return (List<FavoriteCountryDTO>) favoriteService.findFavoriteCountries();
     }
 
     @GetMapping("/favoriteGlobal")
-    public List<FavoriteGlobalEntity> getFavoriteGlobalsData() {
-        return (List<FavoriteGlobalEntity>) favoritesGlobalRepository.findAll();
+    public FavoriteGlobalDTO getFavoriteGlobalsData() {
+        return (FavoriteGlobalDTO) favoriteService.findFavoriteGlobal();
     }
 
     @PostMapping("/favoriteCountries")
-    void addFavoriteCountriesData(@RequestBody List<FavoriteCountryEntity> favoriteCountryEntities) {
-        favoritesCountryRepository.saveAll(favoriteCountryEntities);
+    void addFavoriteCountriesData(@RequestBody List<FavoriteCountryDTO> favoriteCountryEntities) {
+        favoriteService.setFavoriteCountries(favoriteCountryEntities);
     }
 
     @PostMapping("/favoriteGlobal")
-    void addFavoriteGlobalData(@RequestBody List<FavoriteGlobalEntity> favoriteGlobalEntities) {
-        favoritesGlobalRepository.saveAll(favoriteGlobalEntities);
+    void addFavoriteGlobalData(@RequestBody List<FavoriteGlobalDTO> favoriteGlobalEntities) {
+        favoriteService.se(favoriteGlobalEntities);
     }
 }

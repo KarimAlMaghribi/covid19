@@ -3,9 +3,11 @@ package com.example.serviceregistrationanddiscoveryclient.service;
 import com.example.serviceregistrationanddiscoveryclient.dto.mapper.FavoritesMapper;
 import com.example.serviceregistrationanddiscoveryclient.dto.model.FavoriteCountryDTO;
 import com.example.serviceregistrationanddiscoveryclient.dto.model.FavoriteGlobalDTO;
+import com.example.serviceregistrationanddiscoveryclient.dto.model.GlobalDTO;
 import com.example.serviceregistrationanddiscoveryclient.model.entity.FavoriteCountryEntity;
 import com.example.serviceregistrationanddiscoveryclient.repository.FavoritesCountryRepository;
 import com.example.serviceregistrationanddiscoveryclient.repository.FavoritesGlobalRepository;
+import com.example.serviceregistrationanddiscoveryclient.repository.GlobalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -18,6 +20,9 @@ public class FavoriteServiceImpl implements FavoriteService{
     @Autowired
     FavoritesGlobalRepository favoritesGlobalRepository;
 
+    @Autowired
+    GlobalRepository globalRepository;
+
     @Override
     public List<FavoriteCountryDTO> findFavoriteCountries() {
         List<FavoriteCountryDTO> favoriteCountryDTOS = new ArrayList<>();
@@ -29,12 +34,22 @@ public class FavoriteServiceImpl implements FavoriteService{
         return favoriteCountryDTOS;
     }
 
+    @Override
+    public FavoriteGlobalDTO findFavoriteGlobal() {
+        return FavoritesMapper.toFavoritesGlobalDTO(favoritesGlobalRepository.findAll().get(0));
+    }
+
     FavoritesMapper f = new FavoritesMapper();
     @Override
     public void setFavoriteCountries(List<FavoriteCountryDTO> favoriteCountryDTOS) {
         for (FavoriteCountryDTO favoriteGlobalDTO: favoriteCountryDTOS){
             favoritesCountryRepository.save(f.toFavoritesCountryEntity(favoriteGlobalDTO));
         }
+    }
+
+    @Override
+    public void setFavoriteGlobal(FavoriteGlobalDTO favoriteGlobal) {
+        favoritesGlobalRepository.save();
     }
 
     @Override
