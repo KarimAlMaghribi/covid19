@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FavoriteService {
     List<FavoriteCountryDTO> findFavoriteCountries();
-    List<FavoriteCountryDTO> setFavoriteCountries (List<FavoriteCountryDTO> favoriteCountryDTOS);
+    void setFavoriteCountries (List<FavoriteCountryDTO> favoriteCountryDTOS);
     void deleteFavoriteCountryByName(String countryName);
     void deleteFavoriteGlobal();
     void deleteAllFavorites();

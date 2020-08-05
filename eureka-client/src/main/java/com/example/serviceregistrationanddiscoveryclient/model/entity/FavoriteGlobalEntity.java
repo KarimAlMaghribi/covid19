@@ -1,5 +1,6 @@
 package com.example.serviceregistrationanddiscoveryclient.model.entity;
 
+import com.example.serviceregistrationanddiscoveryclient.remoteDataSource.Global;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,5 +18,5 @@ public class FavoriteGlobalEntity {
     @Id
     private String id;
     @DBRef
-    private GlobalEntity global;
+    private Global global;
 }

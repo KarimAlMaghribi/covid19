@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -12,6 +13,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Accessors(chain = true)
 @Document(collection = "Global")
 public class GlobalEntity {
+    @Id
+    private String id;
     private int newConfirmed;
     private int totalConfirmed;
     private int newDeaths;

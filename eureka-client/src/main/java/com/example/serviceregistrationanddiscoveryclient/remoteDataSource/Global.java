@@ -2,6 +2,12 @@
 package com.example.serviceregistrationanddiscoveryclient.remoteDataSource;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +21,14 @@ import java.util.Map;
     "NewRecovered",
     "TotalRecovered"
 })
+@Getter
+@Setter
+@NoArgsConstructor
+@Accessors(chain = true)
+@Document(collection = "Global")
 public class Global {
-
+    @Id
+    public String id;
     @JsonProperty("NewConfirmed")
     public Integer newConfirmed;
     @JsonProperty("TotalConfirmed")

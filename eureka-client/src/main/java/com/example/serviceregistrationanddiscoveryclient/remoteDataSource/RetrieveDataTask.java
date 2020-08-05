@@ -1,6 +1,7 @@
 package com.example.serviceregistrationanddiscoveryclient.remoteDataSource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
-
+@Service
 public class RetrieveDataTask {
 
     private DataImpl retrieveData() {
@@ -31,8 +32,7 @@ public class RetrieveDataTask {
 
                 ObjectMapper mapper = new ObjectMapper();
                 DataImpl result = mapper.readValue(response.toString(),DataImpl.class);
-                List<Country> c = result.countries;
-                Global global = result.global;
+
                 return result;
             }
         } catch (IOException e) {

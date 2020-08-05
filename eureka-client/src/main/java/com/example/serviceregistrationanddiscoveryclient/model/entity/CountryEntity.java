@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Country")
 public class CountryEntity {
     @Id
+    public String id;
     public String country;
     public String countryCode;
     public String slug;

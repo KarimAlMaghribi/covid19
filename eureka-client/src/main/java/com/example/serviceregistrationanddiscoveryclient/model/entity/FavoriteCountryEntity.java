@@ -1,5 +1,6 @@
 package com.example.serviceregistrationanddiscoveryclient.model.entity;
 
+import com.example.serviceregistrationanddiscoveryclient.remoteDataSource.Country;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,5 +18,5 @@ public class FavoriteCountryEntity {
     @Id
     private String id;
     @DBRef
-    private CountryEntity country;
+    private Country country;
 }

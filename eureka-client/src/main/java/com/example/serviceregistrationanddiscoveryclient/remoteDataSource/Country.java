@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -33,6 +34,8 @@ import java.util.Map;
 @Accessors(chain = true)
 @Document(collection = "Country")
 public class Country {
+    @Id
+    public String id;
     @JsonProperty("Country")
     public String country;
     @JsonProperty("CountryCode")
