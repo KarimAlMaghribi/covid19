@@ -6,6 +6,7 @@ import com.example.serviceregistrationanddiscoveryclient.model.entity.FavoriteCo
 import com.example.serviceregistrationanddiscoveryclient.model.entity.FavoriteGlobalEntity;
 import com.example.serviceregistrationanddiscoveryclient.remoteDataSource.Country;
 import com.example.serviceregistrationanddiscoveryclient.repository.CountryRepository;
+import com.example.serviceregistrationanddiscoveryclient.repository.GlobalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -37,5 +38,13 @@ public class FavoritesMapper {
         }
         return favoriteCountryEntity;
     }
+
+    @Autowired
+    GlobalRepository globalRepository;
+    public  FavoriteGlobalEntity toFavoritesGlobalEntity(FavoriteGlobalDTO favoriteGlobalDTO) {
+        return new FavoriteGlobalEntity()
+                .setGlobal(globalRepository.findAll().get(0));
+    }
+
 
 }

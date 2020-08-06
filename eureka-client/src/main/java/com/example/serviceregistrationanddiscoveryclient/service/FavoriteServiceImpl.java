@@ -49,7 +49,8 @@ public class FavoriteServiceImpl implements FavoriteService{
 
     @Override
     public void setFavoriteGlobal(FavoriteGlobalDTO favoriteGlobal) {
-        favoritesGlobalRepository.save();
+
+        favoritesGlobalRepository.save(f.toFavoritesGlobalEntity(favoriteGlobal));
     }
 
     @Override

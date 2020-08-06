@@ -12,6 +12,7 @@ import com.example.serviceregistrationanddiscoveryclient.service.DataService;
 import com.example.serviceregistrationanddiscoveryclient.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -54,7 +55,23 @@ public class RestController {
     }
 
     @PostMapping("/favoriteGlobal")
-    void addFavoriteGlobalData(@RequestBody List<FavoriteGlobalDTO> favoriteGlobalEntities) {
-        favoriteService.se(favoriteGlobalEntities);
+    void addFavoriteGlobalData(@RequestBody FavoriteGlobalDTO favoriteGlobalEntities) {
+        if (favoriteGlobalEntities.getNewConfirmed() > 0 )
+        favoriteService.setFavoriteGlobal(favoriteGlobalEntities);
+    }
+
+    @PostMapping("/favoriteCountries/delete/{name}")
+    public void deleteFavoriteCountryByName(@PathVariable String countryName) {
+        favoriteService.deleteFavoriteCountryByName(countryName);
+    }
+
+    @PostMapping("/favoriteGlobal/delete")
+    public void deleteFavoriteGlobal() {
+        favoriteService.deleteFavoriteGlobal();
+    }
+
+    @PostMapping("/favorites/deleteall")
+    public void deleteAllFavorites() {
+        deleteAllFavorites();
     }
 }
