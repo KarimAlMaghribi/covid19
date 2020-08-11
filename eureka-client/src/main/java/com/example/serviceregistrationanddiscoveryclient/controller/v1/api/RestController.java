@@ -11,10 +11,7 @@ import com.example.serviceregistrationanddiscoveryclient.repository.GlobalReposi
 import com.example.serviceregistrationanddiscoveryclient.service.DataService;
 import com.example.serviceregistrationanddiscoveryclient.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,48 +25,49 @@ public class RestController {
 
     FavoriteService favoriteService;
 
-
+ //   @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/countries")
     public List<CountryDTO> getCountriesData() {
         return (List<CountryDTO>) dataService.getAllCountries();
     }
 
+//    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/global")
     public GlobalDTO getGlobalData() {
         return (GlobalDTO) dataService.getGlobalData();
     }
-
+  //  @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/favoriteCountries")
     public List<FavoriteCountryDTO> getFavoriteCountriesData() {
         return (List<FavoriteCountryDTO>) favoriteService.findFavoriteCountries();
     }
-
+//    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/favoriteGlobal")
     public FavoriteGlobalDTO getFavoriteGlobalsData() {
         return (FavoriteGlobalDTO) favoriteService.findFavoriteGlobal();
     }
-
+ //   @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/favoriteCountries")
     void addFavoriteCountriesData(@RequestBody List<FavoriteCountryDTO> favoriteCountryEntities) {
         favoriteService.setFavoriteCountries(favoriteCountryEntities);
     }
-
+ //   @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/favoriteGlobal")
     void addFavoriteGlobalData(@RequestBody FavoriteGlobalDTO favoriteGlobalEntities) {
         if (favoriteGlobalEntities.getNewConfirmed() > 0 )
         favoriteService.setFavoriteGlobal(favoriteGlobalEntities);
     }
-
+  //  @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/favoriteCountries/delete/{name}")
     public void deleteFavoriteCountryByName(@PathVariable String countryName) {
         favoriteService.deleteFavoriteCountryByName(countryName);
     }
-
+ //   @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/favoriteGlobal/delete")
     public void deleteFavoriteGlobal() {
         favoriteService.deleteFavoriteGlobal();
     }
-
+  //  @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/favorites/deleteall")
     public void deleteAllFavorites() {
         deleteAllFavorites();

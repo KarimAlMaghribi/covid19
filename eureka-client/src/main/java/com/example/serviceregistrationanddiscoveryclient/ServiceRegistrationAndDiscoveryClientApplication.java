@@ -35,6 +35,7 @@ public class ServiceRegistrationAndDiscoveryClientApplication {
 	public void doSomethingAfterStartup() {
 		dataService.setAllCountries();
 		dataService.setGlobalData();
+		dataService.getAllCountries();
 	}
 }
 

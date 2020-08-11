@@ -1,3 +1,4 @@
+
 package com.example.serviceregistrationanddiscoveryclient;
 
 import static org.assertj.core.api.BDDAssertions.*;
@@ -31,7 +32,7 @@ public class ServiceRegistrationAndDiscoveryClientApplicationTests {
 	@BeforeAll
 	public static void startEureka() {
 		eurekaServer = SpringApplication.run(EurekaServer.class,
-				"--server.port=8761",
+				"--server.port=8082",
 				"--eureka.instance.leaseRenewalIntervalInSeconds=1");
 	}
 

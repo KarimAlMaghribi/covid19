@@ -35,6 +35,7 @@ public class DataServiceImpl implements DataService{
 
         for(Country country: countryList) {
             countryDTOS.add(CountryMapper.toCountryDTO(country));
+            System.out.println(country.getCountry());
         }
 
         return countryDTOS;
